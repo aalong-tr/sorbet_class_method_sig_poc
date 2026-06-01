@@ -5,6 +5,8 @@ A minimal Rails engine gem that reproduces a `sorbet-runtime` bug where
 between"** when eager-loading a model that has consecutive `sig`/`def self.*`
 pairs.
 
+_NB: this documentation is mostly produced by LLM, but the actual failure has been manually validated and can be reliably reproduced using the steps described.
+
 ## Affected versions
 
 | Gem | Version |

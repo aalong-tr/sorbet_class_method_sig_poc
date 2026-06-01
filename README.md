@@ -5,7 +5,7 @@ A minimal Rails engine gem that reproduces a `sorbet-runtime` bug where
 between"** when eager-loading a model that has consecutive `sig`/`def self.*`
 pairs.
 
-## Versions
+## Affected versions
 
 | Gem | Version |
 |-----|---------|
@@ -15,6 +15,25 @@ pairs.
 | tapioca | 0.19.1 |
 | require-hooks | 0.4.0 |
 | zeitwerk | 2.8.2 |
+
+## Rails version compatibility
+
+The bug is **specific to Rails 7.1.x**. Tested with the same sorbet/tapioca
+versions against other Rails releases:
+
+| Rails version | Result |
+|---|---|
+| **7.1.5.2** | 💥 Crashes — `sig called twice` |
+| **7.2.3.1** | ✅ Passes |
+| **8.0.5** | ✅ Passes |
+
+Something in the Rails 7.1 → 7.2 initialization sequence changed how Zeitwerk
+triggers eager loading relative to when `require-hooks` installs its `load_iseq`
+interceptor. Under Rails 7.2+, `singleton_method_added` fires correctly and
+each `sig` is consumed before the next one is reached. The exact Rails-side
+change has not been pinpointed, but it is a strong signal that the root cause
+is a **timing/ordering interaction** between the three components rather than
+a standalone bug in any single gem.
 
 ## Reproducing the bug
 

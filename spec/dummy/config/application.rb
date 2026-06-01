@@ -12,8 +12,8 @@ module Dummy
   class Application < Rails::Application
     config.load_defaults 7.1
 
-    # Disable eager loading so that autoload resolves lazily during tapioca dsl
-    config.eager_load = false
+    # Enable eager loading so tapioca dsl discovers all engine models
+    config.eager_load = true
 
     # Point Rails root at the dummy directory
     config.root = File.expand_path("..", __dir__)

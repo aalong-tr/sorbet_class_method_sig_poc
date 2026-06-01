@@ -1,0 +1,12 @@
+/.bundle/
+/vendor/bundle
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
+/spec/dummy/log/
+/spec/dummy/tmp/
+/tmp/
+/sorbet/rbi/gems/
+/sorbet/rbi/dsl/
+/sorbet/rbi/todo.rbi
+/sorbet/tapioca/
